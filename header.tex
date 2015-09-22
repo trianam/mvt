@@ -13,6 +13,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 %\usepackage[italian]{babel}
+\usepackage{acronym}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{listings}
@@ -117,11 +118,11 @@ north east, align=center, drop shadow, draw=drawColor, fill=white]
   \lstinputlisting[style=customJava, title={\texttt{\detokenize{#2}}}, #1]{#2}
 }
 
-\newcommand{\jj}[2][]{
-  \colorbox{codeBgColor}{
-    \lstinline[style=customJava,#1]`#2`
-  }
-}
+\newcommand{\jj}[2][]{\lstinline[style=customJava,#1]`#2`}
+  %\colorbox{codeBgColor}{
+  %  \lstinline[style=customJava,#1]`#2`
+  %}
+%}
 
 \lstnewenvironment{bblock}[1][]
 {

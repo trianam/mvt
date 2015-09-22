@@ -9,11 +9,11 @@
 
 \begin{document}
 
-\title[MRP Steady State]{\textbf{Markov Regenerative Processes -
-    Steady State analysis}}
+\title[\acs{MRP} steady-state]{\textbf{\acl{MRP} -
+    steady-state analysis}}
 \date[\today]{\flushright \today}
 \subtitle{MVT exam}
-\institute[Università Degli Studi di Firenze]{
+\institute[Uni. Firenze]{
   \includegraphics[width=1cm]{img/logoUnifi.jpg}\\[5mm]
   Universit\`a degli Studi di Firenze
 }
@@ -36,20 +36,203 @@
     Commons Attribution-ShareAlike 4.0 International License}.
 }
 
+\newacro{MRP}{Markov Regenerative Process}
+\newacro{SMP}{Semi-Markov Process}
+\newacro{CTMC}{Continuous Time Markov Process}
+\newacro{DTMC}{Discrete Time Markov Process}
+\newacro{PN}{Petri Net}
+
+\acrodefplural{MRP}[MRP]{Markov Regenerative Processes}
+\acrodefplural{SMP}[SMP]{Semi-Markov Processes}
+\acrodefplural{CTMC}[CTMC]{Continuous Time Markov Processes}
+\acrodefplural{DTMC}[DTMC]{Discrete Time Markov Processes}
+\acrodefplural{PN}[PN]{Petri Nets}
 
 \begin{frame}[plain]
   \titlepage
 \end{frame}
 
-\section{Intro MRP}
+\section{Intro \acfp{MRP}}
 \begin{frame}
-  \frametitle{Markov Regenerative Processes}
-  
+  \frametitle{\acfp{MRP}}
+  \begin{block}{Definition}
+    A \acf{MRP} is a stochastic process that soon or later, with
+    probability one, will
+    reach a \alert{regenerative} state (will be regenerated).
+  \end{block}
+  \pause
+  \begin{block}{Regenerative state}
+    A state where the process loses its memory. 
+  \end{block}
+  \pause
+  SCHEMETTINO CTMC-SMP-MRP
 \end{frame}
 
-\section{Algorithm}
-\subsection{Steady state regeneration classes}
+\begin{frame}
+  \frametitle{The steady-state problem}
+  \begin{block}{Transient probabilities}
+    The probability distribution that the process will be in a certain
+    state, after given $t$ time.
+  \end{block}
+  \pause
+  \begin{block}{Steady-state}
+    For ergodic systems, it represents the probability distribution
+    that the
+    process will be in a certain state, as time goes to infinity.
+  \end{block}
+  \pause
+  \begin{itemize}
+  \item ORIS current state:
+    \begin{itemize}
+    \item Transient analysis for \ac{MRP}
+    \item Steady-state analysis for everything else
+    \end{itemize}
+    \pause
+  \item Until now! \rotatebox[origin=c]{270}{:D}
+    \pause
+  \item \alert{Warning:} we assume that the \ac{MRP} is ergodic, so we don't check it
+  \end{itemize}
+\end{frame}
+
+\section{General algorithm}
+\begin{frame}
+  \frametitle{\ac{MRP} steady-state analysis theory}
+  General idea:
+  \pause
+  \begin{enumerate}
+  \item Calculate the embedded \ac{DTMC} steady-state on the
+    regenerative states
+  \pause
+  \item Calculate the sojourn times in each marking, after each
+    regenerative state
+  \pause
+  \item Combine the two above in order to calculate the \ac{MRP} steady-state
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  SCHEMETTINO PUNTI SOPRA
+\end{frame}
+\subsection{Steady-state of the embedded \acs{DTMC} on regenerative
+  states}
+\begin{frame}
+  \frametitle{\insertsubsection}
+  \begin{block}{steady-state in \ac{DTMC}}
+    If the steady-state of a \ac{DTMC} exists and is unique (if is
+    ergodic), then it's calculated by solving for $v$ the linear
+    system:
+    \begin{equation*}
+      \begin{cases}
+        v=vP\\
+        |v| = 1
+      \end{cases}
+    \end{equation*}
+  \end{block}
+  \pause
+  \begin{itemize}
+  \item We want to calculate the embedded \ac{DTMC} of the \ac{MRP} in
+    the regenerative states
+    \pause
+  \item But we don't have $P$! \rotatebox[origin=c]{270}{:(}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Reaching probability feature}
+    \begin{itemize}
+    \item We add a new \alert{reaching probability feature} to each
+      state: \jj{class ReachingProbabilityFeature}
+      % \pause
+    \item Inside \jj{class SteadyStateInitialStateBuilder}: set it to
+      1
+      %\pause
+    \item Inside \jj{class SteadyStatePostProcessor}: multiply the
+      parent's reaching probability by the probability to chose a
+      certain child
+    \end{itemize}
+  \end{block}
+  %\pause
+  If we run a transient analysis on the \ac{PN} we get:
+  \begin{itemize}
+  \item \jj{regenerationClasses}
+  \item {\scriptsize\jj{Map<DeterministicEnablingState,Map<DeterministicEnablingState,Set<State>>>}}
+  \item sum reaching probability feature of each \jj{State} to compute
+    elements of \alert{$P$}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  Now we can solve the linear system
+  \begin{equation*}
+    \begin{cases}
+      v=vP\\
+      |v| = 1
+    \end{cases}
+    =
+    \begin{cases}
+      (P'-I)v'=0\\
+      \sum_i v_i = 1
+    \end{cases}
+  \end{equation*}
+  \begin{itemize}
+  \item \jj{RealMatrix} \& \jj{RealVector}
+  \item QR decomposition solver
+    \begin{itemize}\tiny
+    \item \jj{DecompositionSolver solver = new QRDecomposition(coefficients).getSolver();}
+    \item \jj{RealVector steadyState = solver.solve(constants);}
+    \end{itemize}
+  \item Convert \jj{steadyState} into a \jj{Map<DeterministicEnablingState,BigDecimal>}
+  \end{itemize}
+\end{frame}
+
 \subsection{Sojourn time $a_{ij}$}
-\subsection{steady state MRP}
+\begin{frame}
+  \frametitle{\insertsubsection}
+  \begin{block}{Definition}
+    The sojourn time \alert{$a_{ij}$} represents the average time spent in the
+    \alert{$j$-th marking} after the (last) \alert{$i$-th regeneration}.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to compute $a_{ij}$?}
+  $a_{ij}$ is:
+  \begin{itemize}
+  \item sum of avg time spent in marking $j$ occurrences
+    \begin{itemize}
+    \item avg time before each variable fires
+      \begin{itemize}
+      \item condition each variable to be the minimum (i.e. the one
+        that fires)
+      \item compute avg time before that variable fires (thanks Marco!)
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{When to compute $a_{ij}$?}
+  During the transient analysis!
+  \begin{itemize}
+  \item transient analysis generates succession trees for each
+    regenerative state
+    \begin{itemize}
+    \item regenerative state as root
+    \item following regenerative states as leaves
+    \item reachable markings as inner nodes
+    \end{itemize}
+  \item during the tree generation compute and accumulate $a_{ij}$ for
+    each marking occurrence found
+  \end{itemize}
+\end{frame}
+\subsection{\acf{MRP} steady-state}
+\begin{frame}
+  \frametitle{\insertsubsection}
+  
+\end{frame}
 \section{Test}
+\begin{frame}
+  \frametitle{\insertsection}
+  
+\end{frame}
 \end{document}
