@@ -14,7 +14,8 @@
 \date[\today]{\flushright \today}
 \subtitle{MVT exam}
 \institute[Uni. Firenze]{
-  \includegraphics[width=1cm]{img/logoUnifi.jpg}\\[5mm]
+  \includegraphics[width=2cm]{img/logoUnifi.eps}\\
+%  \includegraphics[width=2cm]{img/logoUnifi.png}\\
   Universit\`a degli Studi di Firenze
 }
 
@@ -29,6 +30,7 @@
 }
 
 \titlegraphic{
+  \vspace{-0.5cm}
   \tiny
   \href{http://creativecommons.org/licenses/by-sa/4.0/}{\includegraphics[width=1cm]{img/logoCC.png}}
   This work is licensed under a
@@ -56,7 +58,7 @@
 \begin{frame}
   \frametitle{\acfp{MRP}}
   \begin{block}{Definition}
-    A \acf{MRP} is a stochastic process that soon or later, with
+    A \acf{MRP} is a stochastic process that sooner or later, with
     probability one, will
     reach a \alert{regenerative} state (will be regenerated).
   \end{block}
@@ -65,7 +67,13 @@
     A state where the process loses its memory. 
   \end{block}
   \pause
-  SCHEMETTINO CTMC-SMP-MRP
+  \begin{center}    
+    \begin{tikzpicture}[node distance=5mm]
+      \visible<5->{\draw[fill=c1] (1,0) ellipse (3cm and 1.4cm)  node[right=1.5cm] {\acs{MRP}};}
+      \visible<4->{\draw[fill=c2] (0.5,0) ellipse (2cm and 1cm) node[right=.5cm] {\acs{SMP}};}
+      \visible<3->{\draw[fill=c3] (0,0) ellipse (1cm and 0.6cm) node {\acs{CTMC}};}
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -84,41 +92,44 @@
   \begin{itemize}
   \item ORIS current state:
     \begin{itemize}
-    \item Transient analysis for \ac{MRP}
+    \item Transient analysis for \acf{MRP}
     \item Steady-state analysis for everything else
     \end{itemize}
     \pause
   \item Until now! \rotatebox[origin=c]{270}{:D}
     \pause
-  \item \alert{Warning:} we assume that the \ac{MRP} is ergodic, so we don't check it
+  \item \alert{Warning:} we assume that the \acs{MRP} is ergodic, so we don't check it
   \end{itemize}
 \end{frame}
 
 \section{General algorithm}
 \begin{frame}
-  \frametitle{\ac{MRP} steady-state analysis theory}
+  \frametitle{\acf{MRP} steady-state analysis theory}
   General idea:
-  \pause
   \begin{enumerate}
-  \item Calculate the embedded \ac{DTMC} steady-state on the
+  \item<2-> Calculate the embedded \acs{DTMC} steady-state on the
     regenerative states
-  \pause
-  \item Calculate the sojourn times in each marking, after each
+  \item<3-> Calculate the sojourn times in each marking, after each
     regenerative state
-  \pause
-  \item Combine the two above in order to calculate the \ac{MRP} steady-state
+  \item<4-> Combine the two above in order to calculate the \acs{MRP} steady-state
   \end{enumerate}
+  \begin{center}
+    \begin{tikzpicture}[node distance=1.5cm and 5mm, text width=3cm, align=center]
+      \uncover<4->{\node (combine) [rect, fill=c1] {\acs{MRP} steady-state};}
+      \uncover<2->{\node (embedded) [rect, fill=c2, above left=of combine.north] {Embedded \acs{DTMC} steady-state};}
+      \uncover<3->{\node (sojourn) [rect, fill=c3, above right=of combine.north] {Sojourn times};}
+      \uncover<4->{\draw[arrow] (embedded) -- (combine);}
+      \uncover<4->{\draw[arrow] (sojourn) -- (combine);}
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
-\begin{frame}
-  SCHEMETTINO PUNTI SOPRA
-\end{frame}
 \subsection{Steady-state of the embedded \acs{DTMC} on regenerative
   states}
 \begin{frame}
   \frametitle{\insertsubsection}
-  \begin{block}{steady-state in \ac{DTMC}}
-    If the steady-state of a \ac{DTMC} exists and is unique (if is
+  \begin{block}{Steady-state in \acf{DTMC}}
+    If the steady-state of a \acf{DTMC} exists and is unique (if is
     ergodic), then it's calculated by solving for $v$ the linear
     system:
     \begin{equation*}
@@ -130,10 +141,10 @@
   \end{block}
   \pause
   \begin{itemize}
-  \item We want to calculate the embedded \ac{DTMC} of the \ac{MRP} in
+  \item We want to calculate the steady-state of the embedded \acs{DTMC} of the \acs{MRP} in
     the regenerative states
     \pause
-  \item But we don't have $P$! \rotatebox[origin=c]{270}{:(}
+  \item But we don't have $P$! \pause \rotatebox[origin=c]{270}{:'(}
   \end{itemize}
 \end{frame}
 
@@ -143,16 +154,16 @@
     \item We add a new \alert{reaching probability feature} to each
       state: \jj{class ReachingProbabilityFeature}
       % \pause
-    \item Inside \jj{class SteadyStateInitialStateBuilder}: set it to
+    \item Inside \jj{SteadyStateInitialStateBuilder}: set it to
       1
       %\pause
-    \item Inside \jj{class SteadyStatePostProcessor}: multiply the
+    \item Inside \jj{SteadyStatePostProcessor}: multiply the
       parent's reaching probability by the probability to chose a
       certain child
     \end{itemize}
   \end{block}
   %\pause
-  If we run a transient analysis on the \ac{PN} we get:
+  If we run a transient analysis on the \acf{PN} we get:
   \begin{itemize}
   \item \jj{regenerationClasses}
   \item {\scriptsize\jj{Map<DeterministicEnablingState,Map<DeterministicEnablingState,Set<State>>>}}
@@ -208,6 +219,32 @@
       \end{itemize}
     \end{itemize}
   \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}[myMindmap]
+      \begin{scope}[concept color=mmc2]
+        \node(l) {i}
+        child[concept color=mmcb] { node {}
+          child { node{} }
+          child[concept color=mmc1] { node{j}
+            child[concept color=mmcb] { node{} }
+            child[concept color=mmcb] { node{} }
+          }
+        }
+        child[concept color=mmcb] { node{} }
+        child[concept color=mmcb] { node{} 
+          child[concept color=mmc1] { node{j}
+            child[concept color=mmcb] { node {} }
+          }
+        };        
+      \end{scope}
+      \begin{scope}[concept color=mmc1]
+        \node[right=5cm of l] {j}
+        child[concept color=mmcb] { node[label={[label distance=2.5mm]50:$v_1$}] {} }
+        child[concept color=mmcb] { node[label={[label distance=0.1mm]93:$v_2$}] {} }
+        child[concept color=mmcb] { node[label={[label distance=2.5mm]135:$v_3$}] {} };
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -228,7 +265,22 @@
 \subsection{\acf{MRP} steady-state}
 \begin{frame}
   \frametitle{\insertsubsection}
-  
+  Let's combine the embedded \acs{DTMC} steady-state and the sojourn
+  times!
+  \pause
+  \begin{equation*}
+    \pi_j = \frac{\sum_i v_i a_{ij}}{K}
+  \end{equation*}
+  \pause
+  \begin{itemize}
+  \item We multiply the sojourn time in the marking $j$ after the
+    regeneration $i$ by the probability of reaching the $i$-th regeneration
+    \pause
+  \item We do this for each regeneration that leads to the marking $j$
+    before another regeneration
+    \pause
+  \item $K$ is a normalization factor calculated as the sum of $\pi_j$
+  \end{itemize}
 \end{frame}
 \section{Test}
 \begin{frame}

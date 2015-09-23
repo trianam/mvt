@@ -22,8 +22,11 @@
 \usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{shapes, chains, scopes, shadows, positioning, arrows,
-  decorations.pathmorphing, calc}
+  decorations.pathmorphing, calc, mindmap}
 
+\colorlet{mmcb}{black!20}
+\colorlet{mmc1}{red!80}
+\colorlet{mmc2}{blue!80}
 \colorlet{c1}{green!20}
 \colorlet{c2}{blue!10}
 \colorlet{c3}{yellow!10}
@@ -53,6 +56,13 @@ shadow, draw=drawColor, fill=white]
 \tikzstyle{file}=[chamfered rectangle, chamfered rectangle corners =
 north east, align=center, drop shadow, draw=drawColor, fill=white]
 \tikzstyle{files}=[chamfered rectangle, chamfered rectangle corners = north east, align=center, double copy shadow, draw=drawColor, fill=white]
+\tikzstyle{myMindmap}=[mindmap,
+every node/.style={concept, minimum size=5mm, text width=5mm}, 
+% every child/.style={level distance=10mm, concept color=mmcb}
+level 1/.append style={level distance=10mm,sibling angle=45},
+level 2/.append style={level distance=10mm,sibling angle=45},
+level 3/.append style={level distance=10mm,sibling angle=45}
+]
 
 \lstdefinestyle{customJava}{
    language=Java,
@@ -180,4 +190,12 @@ north east, align=center, drop shadow, draw=drawColor, fill=white]
   \setbeamertemplate{itemize subitem}{-}
   \setbeamertemplate{enumerate items}[default]
   \setbeamertemplate{sections/subsections in toc}[square]
+}
+
+\usebackgroundtemplate
+{
+  \begin{tikzpicture}
+    \node[opacity=0.04] {\includegraphics[scale=1]{img/logoUnifi.png}};
+%    \node[opacity=0.04] {\includegraphics[scale=1]{img/logoUnifi.eps}};
+  \end{tikzpicture}
 }
