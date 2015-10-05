@@ -32,7 +32,7 @@ auto/
 ## Build tool auxiliary files:
 *.fdb_latexmk
 *.synctex
-*.synctex.gz
+#*.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
 

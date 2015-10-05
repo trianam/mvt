@@ -14,14 +14,14 @@
 \date[\today]{\flushright \today}
 \subtitle{MVT exam}
 \institute[Uni. Firenze]{
-  \includegraphics[width=2cm]{img/logoUnifi.eps}\\
-%  \includegraphics[width=2cm]{img/logoUnifi.png}\\
+%  \includegraphics[width=2cm]{img/logoUnifi.eps}\\
+  \includegraphics[width=2cm]{img/logoUnifi.png}\\
   Universit\`a degli Studi di Firenze
 }
 
 \author[Martina - Papini]{
   \begin{center}
-    \begin{tabular}{ll}
+    \begin{tabular}{lr}
       Stefano \textsc{Martina}&Tommaso \textsc{Papini}\\
       \href{mailto:stefano.martina@stud.unifi.it}{stefano.martina@stud.unifi.it}&
       \href{mailto:tommaso.papini1@stud.unifi.it}{tommaso.papini1@stud.unifi.it}
@@ -78,6 +78,7 @@
 
 \begin{frame}
   \frametitle{The steady-state problem}
+  \pause
   \begin{block}{Transient probabilities}
     The probability distribution that the process will be in a certain
     state, after given $t$ time.
@@ -98,13 +99,13 @@
     \pause
   \item Until now! \rotatebox[origin=c]{270}{:D}
     \pause
-  \item \alert{Warning:} we assume that the \acs{MRP} is ergodic, so we don't check it
+  \item \alert{Warning:} we assume that the \acs{MRP} is ergodic!
   \end{itemize}
 \end{frame}
 
 \section{General algorithm}
 \begin{frame}
-  \frametitle{\acf{MRP} steady-state analysis theory}
+  \frametitle{\acs{MRP} steady-state analysis - The theory}
   General idea:
   \begin{enumerate}
   \item<2-> Calculate the embedded \acs{DTMC} steady-state on the
@@ -122,6 +123,26 @@
       \uncover<4->{\draw[arrow] (sojourn) -- (combine);}
     \end{tikzpicture}
   \end{center}
+\end{frame}
+
+\subsection{Main classes implemented}
+\begin{frame}
+  \frametitle{\insertsubsection}
+  \begin{itemize}
+	  \item \jj{class EmbeddedDTMC}
+	  %\pause
+	  \begin{itemize}
+	  	\item written from scratch
+	  	\item calculate embedded \acs{DTMC} steady-state
+	  \end{itemize}
+	  %\pause
+	  \item \jj{class RegenerativeSteadyStateAnalysis}
+	  %\pause
+	  \begin{itemize}
+	  	\item based on \jj{class RegenerativeTransientAnalysis}
+	  	\item calculate \acs{MRP} steady-state
+	  \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \subsection{Steady-state of the embedded \acs{DTMC} on regenerative
@@ -144,7 +165,7 @@
   \item We want to calculate the steady-state of the embedded \acs{DTMC} of the \acs{MRP} in
     the regenerative states
     \pause
-  \item But we don't have $P$! \pause \rotatebox[origin=c]{270}{:'(}
+  \item But we don't have $P$! \rotatebox[origin=c]{270}{:(}
   \end{itemize}
 \end{frame}
 
@@ -173,7 +194,7 @@
 \end{frame}
 
 \begin{frame}
-  Now we can solve the linear system
+  Now we can solve the linear system:
   \begin{equation*}
     \begin{cases}
       v=vP\\
@@ -211,7 +232,7 @@
   \begin{itemize}
   \item sum of avg time spent in marking $j$ occurrences
     \begin{itemize}
-    \item avg time before each variable fires
+    \item sum of avg time before each variable fires
       \begin{itemize}
       \item condition each variable to be the minimum (i.e. the one
         that fires)
