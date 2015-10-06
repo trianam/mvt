@@ -306,6 +306,29 @@
 \section{Test}
 \begin{frame}
   \frametitle{\insertsection}
-  
+  \begin{block}{Unit test}
+    \begin{itemize}
+    \item Class \jj{SteadyStateTest} with \alert{JUnit} tests
+      \pause
+    \item Three different models:
+      \pause
+      \begin{itemize}
+      \item TestCaseSMP
+        \pause
+      \item TestCase2ParallelTasks
+        \pause
+      \item TestCaseRejuvenation
+        \pause
+      \end{itemize}
+    \item For each test:
+      \pause
+      \begin{enumerate}
+      \item launch \acs{MRP} steady state \alert{analysis}
+        \pause
+      \item check if the result is comparable to the \alert{expected}
+        value \pause (with a tolerance)
+      \end{enumerate}
+    \end{itemize}
+  \end{block}
 \end{frame}
 \end{document}
