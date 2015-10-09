@@ -339,33 +339,33 @@
       \clip (-1,-1) rectangle (7,3.5);
 
       % \draw [help lines] (0,0) grid (6,2);
-      \node (pDown) at (0,1) [myPlace, label=225:$P_{down}$] {};
-      \node (pUp) at (2,2) [myPlace, tokens=1, label=0:$P_{up}$] {};
-      \node (pFprob) at (2,0) [myPlace, label=0:$P_{fprob}$] {};
-      \node (pClock) at (4,2) [myPlace, tokens=1, label=135:$P_{clock}$] {};
-      \node (pRej) at (4,0) [myPlace, label=225:$P_{rej}$] {};
+      \node (pDown) at (0,1) [myPlace, onslide=<15>{tokens=1}, onslide=<15-16>{highlight}, label=225:$P_{down}$] {};
+      \node (pUp) at (2,2) [myPlace, onslide=<{1-3,5,11,17}>{tokens=1}, onslide=<{4,5-6,11-12,17}>{highlight}, label=0:$P_{up}$] {};
+      \node (pFprob) at (2,0) [myPlace, onslide=<{7-9,13}>{tokens=1}, onslide=<{7,10,13-14}>{highlight}, label=0:$P_{fprob}$] {};
+      \node (pClock) at (4,2) [myPlace, onslide=<{1,5-7,11-}>{tokens=1}, onslide=<{2,5,8,11}>{highlight}, label=135:$P_{clock}$] {};
+      \node (pRej) at (4,0) [myPlace, onslide=<{3,9}>{tokens=1}, onslide=<{3-4,9-10}>{highlight}, label=225:$P_{rej}$] {};
 
-      \node (tUp) at (1,2) [transExpV, label=45:$T_{up}$] {}
+      \node (tUp) at (1,2) [transExpV, onslide=<16-17>{highlight}, label=45:$T_{up}$] {}
       edge[pre, bend right=45] (pDown)
       edge[post] (pUp);
-      \node (tDown) at (1,0) [transExpV, label=225:$T_{down}$] {}
+      \node (tDown) at (1,0) [transExpV, onslide=<14-15>{highlight}, label=225:$T_{down}$] {}
       edge[pre] (pFprob)
       edge[preN, bend left=35] (pRej)
       edge[post, bend left=45] (pDown);
-      \node (tFprob) at (2,1) [transExpH, label=0:$T_{fprob}$] {}
+      \node (tFprob) at (2,1) [transExpH, onslide=<{6-7,12-13}>{highlight}, label=0:$T_{fprob}$] {}
       edge[pre] (pUp)
       edge[preN, bend left=10] (pRej)
       edge[post] (pFprob);
-      \node (tClock) at (4,1) [transDetH, label=225:$T_{clock}$] {}
+      \node (tClock) at (4,1) [transDetH, onslide=<{2-3,8-9}>{highlight}, label=225:$T_{clock}$] {}
       edge[pre] (pClock)
       edge[preN, bend right=25] (pDown)
       edge[post] (pRej);
-      \node (tRej1) at (5,1) [transExpH, label=315:$T_{rej1}$] {}
+      \node (tRej1) at (5,1) [transExpH, onslide=<10-11>{highlight}, label=315:$T_{rej1}$] {}
       edge[pre, bend left=20] (pRej)
       edge[post, bend right=20] (pClock)
       edge[pre, bend left=90] (pFprob)
       edge[post, bend right=90] (pUp);
-      \node (tRej2) at (6,1) [transExpH, label={[label distance=2mm]280:$T_{rej2}$}] {}
+      \node (tRej2) at (6,1) [transExpH, onslide=<4-5>{highlight}, label={[label distance=2mm]280:$T_{rej2}$}] {}
       edge[pre, bend left=30] (pRej)
       edge[post, bend right=20] (pClock)
       edge[post, bend right=90] (pUp);

@@ -34,10 +34,17 @@
 \colorlet{c2}{blue!10}
 \colorlet{c3}{yellow!10}
 \colorlet{c4}{red!10}
-\colorlet{drawColor}{black!50}
+\colorlet{drawColor}{black!80}
 \colorlet{commentColor}{green!70!black!90}
 \colorlet{codeBgColor}{yellow!50}
 \colorlet{bashBgColor}{green!50}
+
+\tikzset{onslide/.code args={<#1>#2}{%
+  \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+\tikzset{temporal/.code args={<#1>#2#3#4}{%
+  \temporal<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}{\pgfkeysalso{#4}} % \pgfkeysalso doesn't change the path
+}}
 
 \tikzstyle{oval}=[ellipse, align=center, drop shadow, draw=drawColor, fill=white]
 \tikzstyle{rect}=[rectangle, rounded corners=2pt, align=center, drop
@@ -66,17 +73,17 @@ level 1/.append style={level distance=10mm,sibling angle=45},
 level 2/.append style={level distance=10mm,sibling angle=45},
 level 3/.append style={level distance=10mm,sibling angle=45}
 ]
-\tikzstyle{myPlace} = [place, draw=drawColor, fill=white, drop shadow]
-\tikzstyle{transExpH} = [transition, draw=drawColor, fill=white, drop
+\tikzstyle{myPlace} = [place, very thick, draw=drawColor, fill=white, drop shadow]
+\tikzstyle{transExpH} = [transition, very thick, draw=drawColor, fill=white, drop
 shadow, minimum width=\transW, minimum height=\transH]
-\tikzstyle{transExpV} = [transition, draw=drawColor, fill=white, drop
+\tikzstyle{transExpV} = [transition, very thick, draw=drawColor, fill=white, drop
 shadow, minimum width=\transH, minimum height=\transW]
-\tikzstyle{transDetH} = [transition, draw=drawColor, fill=black, drop shadow, minimum width=\transW, minimum height=\transH]
-\tikzstyle{transDetV} = [transition, draw=drawColor, fill=black, drop shadow, minimum width=\transH, minimum height=\transW]
-\tikzstyle{pre}=[<-, very thick, >=stealth', draw=black!80]
-\tikzstyle{preN}=[<-, very thick, >=o, draw=black!80]
-\tikzstyle{post}=[->, very thick, >=stealth', draw=black!80]
-
+\tikzstyle{transDetH} = [transition, very thick, draw=drawColor, fill=black, drop shadow, minimum width=\transW, minimum height=\transH]
+\tikzstyle{transDetV} = [transition, very thick, draw=drawColor, fill=black, drop shadow, minimum width=\transH, minimum height=\transW]
+\tikzstyle{pre}=[<-, very thick, >=stealth', draw=drawColor]
+\tikzstyle{preN}=[<-, very thick, >=o, draw=drawColor]
+\tikzstyle{post}=[->, very thick, >=stealth', draw=drawColor]
+\tikzstyle{highlight}=[draw=red]
 \lstdefinestyle{customJava}{
    language=Java,
    % basicstyle=\small\ttfamily\bfseries,
