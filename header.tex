@@ -22,7 +22,10 @@
 \usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{shapes, chains, scopes, shadows, positioning, arrows,
-  decorations.pathmorphing, calc, mindmap}
+  decorations.pathmorphing, calc, mindmap, petri}
+
+\def\transW{8mm}
+\def\transH{2mm}
 
 \colorlet{mmcb}{black!20}
 \colorlet{mmc1}{red!80}
@@ -63,6 +66,16 @@ level 1/.append style={level distance=10mm,sibling angle=45},
 level 2/.append style={level distance=10mm,sibling angle=45},
 level 3/.append style={level distance=10mm,sibling angle=45}
 ]
+\tikzstyle{myPlace} = [place, draw=drawColor, fill=white, drop shadow]
+\tikzstyle{transExpH} = [transition, draw=drawColor, fill=white, drop
+shadow, minimum width=\transW, minimum height=\transH]
+\tikzstyle{transExpV} = [transition, draw=drawColor, fill=white, drop
+shadow, minimum width=\transH, minimum height=\transW]
+\tikzstyle{transDetH} = [transition, draw=drawColor, fill=black, drop shadow, minimum width=\transW, minimum height=\transH]
+\tikzstyle{transDetV} = [transition, draw=drawColor, fill=black, drop shadow, minimum width=\transH, minimum height=\transW]
+\tikzstyle{pre}=[<-, very thick, >=stealth', draw=black!80]
+\tikzstyle{preN}=[<-, very thick, >=o, draw=black!80]
+\tikzstyle{post}=[->, very thick, >=stealth', draw=black!80]
 
 \lstdefinestyle{customJava}{
    language=Java,
