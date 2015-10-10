@@ -368,9 +368,32 @@
       \node (tRej2) at (6,1) [transExpH, onslide=<4-5>{highlight}, label={[label distance=2mm]280:$T_{rej2}$}] {}
       edge[pre, bend left=30] (pRej)
       edge[post, bend right=20] (pClock)
-      edge[post, bend right=90] (pUp);
+      edge[post, bend right=90] (pUp.north);
       \draw[pre] (tRej2) .. controls (7,0) and (6,5) .. (pUp);
     \end{tikzpicture}
   \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transient analysis}
+  \begin{center}
+    \includegraphics[width=\textwidth]{img/rejuvenationTrans.png}    
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Steady state analysis}
+  \footnotesize
+  \begin{jblock}
+Map<String, Integer> tmpPlacesMarking = new HashMap<String, Integer>();
+tmpPlacesMarking.put("Pup", Integer.parseInt("1"));
+tmpPlacesMarking.put("Pclock", Integer.parseInt("1"));
+getTestPlacesMarkings().put(tmpPlacesMarking, new BigDecimal("0.58"));
+
+tmpPlacesMarking = new HashMap<String, Integer>();
+tmpPlacesMarking.put("Pfprob", Integer.parseInt("1"));
+tmpPlacesMarking.put("Pclock", Integer.parseInt("1"));
+getTestPlacesMarkings().put(tmpPlacesMarking, new BigDecimal("0.40"));
+  \end{jblock}
 \end{frame}
 \end{document}
