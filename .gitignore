@@ -12,6 +12,8 @@
 auto/
 #*.pdf
 
+*.db
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
