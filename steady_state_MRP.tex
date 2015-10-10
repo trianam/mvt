@@ -44,11 +44,11 @@
 \newacro{DTMC}{Discrete Time Markov Process}
 \newacro{PN}{Petri Net}
 
-\acrodefplural{MRP}[MRP]{Markov Regenerative Processes}
-\acrodefplural{SMP}[SMP]{Semi-Markov Processes}
-\acrodefplural{CTMC}[CTMC]{Continuous Time Markov Processes}
-\acrodefplural{DTMC}[DTMC]{Discrete Time Markov Processes}
-\acrodefplural{PN}[PN]{Petri Nets}
+\acrodefplural{MRP}[MRPs]{Markov Regenerative Processes}
+\acrodefplural{SMP}[SMPs]{Semi-Markov Processes}
+\acrodefplural{CTMC}[CTMCs]{Continuous Time Markov Processes}
+\acrodefplural{DTMC}[DTMCs]{Discrete Time Markov Processes}
+\acrodefplural{PN}[PNs]{Petri Nets}
 
 \begin{frame}[plain]
   \titlepage
@@ -93,8 +93,8 @@
   \begin{itemize}
   \item ORIS current state:
     \begin{itemize}
-    \item Transient analysis for \acf{MRP}
-    \item Steady-state analysis for everything else
+    \item Transient analysis for \acfp{MRP}
+    \item Steady-state analysis for \acfp{CTMC}
     \end{itemize}
     \pause
   \item Until now! \rotatebox[origin=c]{270}{:D}
@@ -110,8 +110,8 @@
   \begin{enumerate}
   \item<2-> Calculate the embedded \acs{DTMC} steady-state on the
     regenerative states
-  \item<3-> Calculate the sojourn times in each marking, after each
-    regenerative state
+  \item<3-> Calculate the expected sojourn time in each marking, after
+    reaching a regenerative state
   \item<4-> Combine the two above in order to calculate the \acs{MRP} steady-state
   \end{enumerate}
   \begin{center}
