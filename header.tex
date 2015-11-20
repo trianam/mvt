@@ -46,26 +46,11 @@
   \temporal<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}{\pgfkeysalso{#4}} % \pgfkeysalso doesn't change the path
 }}
 
+\tikzstyle{alertStar}=[starburst, shape aspect=3, align=center, drop shadow, draw=drawColor, fill=white]
 \tikzstyle{oval}=[ellipse, align=center, drop shadow, draw=drawColor, fill=white]
 \tikzstyle{rect}=[rectangle, rounded corners=2pt, align=center, drop
 shadow, draw=drawColor, fill=white]
-\tikzstyle{comment}=[text=commentColor,font=\itshape]
-\tikzstyle{textLab}=[]
 \tikzstyle{arrow}=[->, very thick, >=stealth', draw=black!80]
-\tikzstyle{darrow}=[->, dash pattern=on 3pt off2pt, very thick, >=stealth', draw=black!80]
-\tikzstyle{fInt}=[circle, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{fStartEnd}=[ellipse, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{fInput}=[trapezium, trapezium left angle=70, trapezium right angle=110,
-align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{fProcess}=[rectangle, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{fSelection}=[diamond, shape aspect=3, align=center, drop
-shadow, draw=drawColor, fill=white]
-\tikzstyle{fOutput}=[tape, tape bend top=none, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{mem}=[rectangle, align=center, draw=drawColor, fill=white]
-\tikzstyle{clo}=[cloud, aspect=2, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{file}=[chamfered rectangle, chamfered rectangle corners =
-north east, align=center, drop shadow, draw=drawColor, fill=white]
-\tikzstyle{files}=[chamfered rectangle, chamfered rectangle corners = north east, align=center, double copy shadow, draw=drawColor, fill=white]
 \tikzstyle{myMindmap}=[mindmap,
 every node/.style={concept, minimum size=5mm, text width=5mm}, 
 % every child/.style={level distance=10mm, concept color=mmcb}
@@ -201,7 +186,7 @@ shadow, minimum width=\transH, minimum height=\transW]
   \setbeamercovered{transparent}
   %\setbeameroption{show notes on second screen=right}
   \setbeamertemplate{navigation symbols}{}
-  \setbeamertemplate{footline}{}
+  %\setbeamertemplate{footline}{}
 
   \bibliographystyle{abbrv}  
   %\renewcommand\bibfont{\scriptsize}
@@ -215,7 +200,7 @@ shadow, minimum width=\transH, minimum height=\transW]
 \usebackgroundtemplate
 {
   \begin{tikzpicture}
-    \node[opacity=0.1] {\includegraphics[scale=1]{img/logoUnifi.png}};
+    \node[opacity=0.1] {\includegraphics[]{img/logoUnifi.png}};
 %    \node[opacity=0.04] {\includegraphics[scale=1]{img/logoUnifi.eps}};
   \end{tikzpicture}
 }
