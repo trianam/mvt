@@ -7,10 +7,11 @@
 %\documentclass[gray,handout, pdftex, 11pt]{beamer}
 %\documentclass[handout, pdftex, 11pt]{beamer}
 
-\documentclass[pdftex, 11pt]{beamer}
+\documentclass[pdflatex, 11pt]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{calligra}
 \usepackage{lmodern}
 %\usepackage[italian]{babel}
 \usepackage{acronym}
@@ -95,32 +96,6 @@ shadow, minimum width=\transH, minimum height=\transW]
    % linewidth=8cm,
 }
 
-\lstdefinestyle{customBash}{
-   language=bash,
-   % basicstyle=\small\ttfamily\bfseries,
-   basicstyle=\ttfamily,
-   keywordstyle=\color{blue}\ttfamily,
-   stringstyle=\color{red}\ttfamily,
-   commentstyle=\color{green}\ttfamily,
-   morecomment=[l][\color{magenta}]{\#},
-   % breaklines=false,
-   breaklines=true, breakatwhitespace=false,
-   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
-   frameround=fttt,
-   frame=trBL,
-   backgroundcolor=\color{green!20},
-   numbers=left,
-   stepnumber=1,    
-   firstnumber=1,
-   numberfirstline=true,
-   numberstyle=\tiny\color{black!50},
-   xleftmargin=2em,
-   framexleftmargin=1.5em,
-   % rulesepcolor=\color{gray},
-   rulecolor=\color{black}
-   % linewidth=8cm,
-}
-
 \lstnewenvironment{jblock}[1][]
 {
   \lstset{
@@ -139,31 +114,8 @@ shadow, minimum width=\transH, minimum height=\transW]
   %}
 %}
 
-\lstnewenvironment{bblock}[1][]
-{
-  \lstset{
-    style=customBash,
-    #1
-  }
-}{}
-
-\newcommand{\bfile}[2][]{
-  \lstinputlisting[style=customBash, title={\texttt{\detokenize{#2}}}, #1]{#2}
-}
-
-\newcommand{\bb}[2][]{
-  \colorbox{bashBgColor}{
-    \lstinline[style=customBash,#1]`#2`
-  }
-}
-
 \graphicspath{{img/}}
 \lstset{inputpath=../cSrc/}
-
-\newcommand{\me}{\mathrm{e}}
-\newcommand{\C}{\texttt{C}}
-\newcommand{\gcc}{\texttt{gcc}}
-\newcommand{\bash}{\texttt{Bash}}
 
 \definecolor{links}{HTML}{2A1B81}
 \hypersetup{colorlinks,linkcolor=links,urlcolor=links}

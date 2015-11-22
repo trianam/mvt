@@ -272,16 +272,19 @@
 
 \begin{frame}
   \frametitle{When to compute $a_{ij}$?}
-  During the transient analysis!
+  \alert{During} the transient analysis!
+  \pause
   \begin{itemize}
-  \item transient analysis generates succession trees for each
+  \item transient analysis generates \alert{succession trees} for each
     regenerative state
+    \pause
     \begin{itemize}
-    \item regenerative state as root
-    \item following regenerative states as leaves
-    \item reachable markings as inner nodes
+    \item regenerative state as \alert{root}
+    \item following regenerative states as \alert{leaves}
+    \item reachable markings as inner \alert{nodes}
+      \pause
     \end{itemize}
-  \item during the tree generation compute and accumulate $a_{ij}$ for
+  \item during the \alert{tree generation} compute and accumulate $a_{ij}$ for
     each marking occurrence found
   \end{itemize}
 \end{frame}
@@ -312,7 +315,7 @@
     \begin{itemize}
     \item Class \jj{SteadyStateTest} with \alert{JUnit} tests
       \pause
-    \item Three different models:
+    \item Three different \alert{models}:
       \pause
       \begin{itemize}
       \item TestCaseSMP
@@ -383,11 +386,10 @@
   \end{center}
   \pause
   \begin{itemize}
-  	\item Steady-state analysis results:
-  	\pause
+  	\item Steady-state estimation using \alert{transient} analysis:
   	\begin{itemize}
-  		\item Prob({\color{red} Pclock Pup}) $\approx 0.58$
-  		\item Prob({\color{blue} Pclock Pfprob}) $\approx 0.40$
+  		\item Prob({\color{red} $P_{clock}=1 \land P_{up}=1$}) $\approx 0.58$
+  		\item Prob({\color{blue} $P_{clock}=1 \land P_{fprob}=1$}) $\approx 0.40$
   	\end{itemize}
   \end{itemize}
 \end{frame}
@@ -423,9 +425,13 @@ getTestPlacesMarkings().put(tmpPlacesMarking, new BigDecimal("0.40"));
 
 \begin{frame}
   \begin{center}
-	\textbf{\Huge The End.}\\[3cm]
+	\textbf{\calligra\Huge The End.}
+  \begin{center}
+    \includegraphics[width=5cm]{img/ornament.eps}    
+  \end{center}
+  \\[1cm]
 	\pause
-	{\huge questions...?}
+	{\huge\calligra Questions?\pause{} Thank you!}
   \end{center}
 \end{frame}
 \end{document}
