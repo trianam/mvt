@@ -229,21 +229,22 @@
 
 \begin{frame}
   \frametitle{How to compute $a_{ij}$?}
-  $a_{ij}$ is:
+  \alert{$a_{ij}$} is:
   \begin{itemize}
-  \item sum of avg time spent in marking $j$ occurrences
+  \item<1-> sum of avg \alert{time spent} in marking $j$ occurrences
     \begin{itemize}
-    \item sum of avg time before each variable fires
+    \item<2-> \alert{sum} of avg times before each variable fires \alert{weighted} by the
+      probability of chosing that variable
       \begin{itemize}
-      \item condition each variable to be the minimum (i.e. the one
+      \item<3-> \alert{condition} each variable to be the minimum (i.e. the one
         that fires)
-      \item compute avg time before that variable fires (thanks Marco!)
+      \item<4-> compute avg time \alert{before} that variable fires (thanks Marco!)
       \end{itemize}
     \end{itemize}
   \end{itemize}
   \begin{center}
     \begin{tikzpicture}[myMindmap]
-      \begin{scope}[concept color=mmc2]
+      \uncover<1->{\begin{scope}[concept color=mmc2]
         \node(l) {i}
         child[concept color=mmcb] { node {}
           child { node{} }
@@ -258,13 +259,13 @@
             child[concept color=mmcb] { node {} }
           }
         };        
-      \end{scope}
-      \begin{scope}[concept color=mmc1]
+      \end{scope}}
+      \uncover<2->{\begin{scope}[concept color=mmc1]
         \node[right=5cm of l] {j}
         child[concept color=mmcb] { node[label={[label distance=2.5mm]50:$v_1$}] {} }
         child[concept color=mmcb] { node[label={[label distance=0.1mm]93:$v_2$}] {} }
         child[concept color=mmcb] { node[label={[label distance=2.5mm]135:$v_3$}] {} };
-      \end{scope}
+      \end{scope}}
     \end{tikzpicture}
   \end{center}
 \end{frame}
