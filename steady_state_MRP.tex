@@ -65,7 +65,7 @@
   \end{block}
   \pause
   \begin{block}{Regenerative state}
-    A state where the process loses its memory. 
+    A state where the process loses its \alert{memory}. 
   \end{block}
   \pause
   \begin{center}    
@@ -81,26 +81,26 @@
   \frametitle{The steady-state problem}
   \pause
   \begin{block}{Transient probabilities}
-    The probability distribution that the process will be in a certain
-    state, after given $t$ time.
+    The \alert{probability} distribution that the process will be in a certain
+    state, after given $t$ \alert{time}.
   \end{block}
   \pause
   \begin{block}{Steady-state}
-    For ergodic systems, it represents the probability distribution
+    For ergodic systems, it represents the \alert{probability} distribution
     that the
-    process will be in a certain state, as time goes to infinity.
+    process will be in a certain state, as time goes to \alert{infinity}.
   \end{block}
   \pause
   \begin{itemize}
   \item ORIS current state:
     \begin{itemize}
-    \item Transient analysis for \acfp{MRP}
-    \item Steady-state analysis for \acfp{CTMC}
+    \item \alert{Transient} analysis for \acfp{MRP}
+    \item \alert{Steady-state} analysis for \acfp{CTMC}
     \end{itemize}
     \pause
   \item Until now! \rotatebox[origin=c]{270}{:D}
     \pause
-  \item \alert{Warning:} we assume that the \acs{MRP} is ergodic!
+  \item \alert{Warning:} we assume that the \acs{MRP} is \alert{ergodic}!
   \end{itemize}
 \end{frame}
 
@@ -109,11 +109,11 @@
   \frametitle{\acs{MRP} steady-state analysis - The theory}
   General idea:
   \begin{enumerate}
-  \item<2-> Calculate the embedded \acs{DTMC} steady-state on the
+  \item<2-> Calculate the embedded \acs{DTMC} \alert{steady-state} on the
     regenerative states
-  \item<3-> Calculate the expected sojourn time in each marking, after
+  \item<3-> Calculate the expected \alert{sojourn time} in each marking, after
     reaching a regenerative state
-  \item<4-> Combine the two above in order to calculate the \acs{MRP} steady-state
+  \item<4-> \alert{Combine} the two above in order to calculate the \acs{MRP} steady-state
   \end{enumerate}
   \begin{center}
     \begin{tikzpicture}[node distance=1.5cm and 5mm, text width=3cm, align=center]
@@ -134,14 +134,14 @@
 	  %\pause
 	  \begin{itemize}
 	  	\item written from scratch
-	  	\item calculate embedded \acs{DTMC} steady-state
+	  	\item calculate \alert{embedded \acs{DTMC}} steady-state
 	  \end{itemize}
 	  %\pause
 	  \item \jj{class RegenerativeSteadyStateAnalysis}
 	  %\pause
 	  \begin{itemize}
 	  	\item based on \jj{class RegenerativeTransientAnalysis}
-	  	\item calculate \acs{MRP} steady-state
+	  	\item calculate \alert{\acs{MRP}} steady-state
 	  \end{itemize}
   \end{itemize}
 \end{frame}
@@ -152,21 +152,22 @@
   \frametitle{\insertsubsection}
   \begin{block}{Steady-state in \acf{DTMC}}
     If the steady-state of a \acf{DTMC} exists and is unique (if is
-    ergodic), then it's calculated by solving for $v$ the linear
-    system:
+    \alert{ergodic}), then it's calculated by solving for $v$ the linear
+    system:\alert{
     \begin{equation*}
       \begin{cases}
         v=vP\\
         |v| = 1
       \end{cases}
     \end{equation*}
+  }
   \end{block}
   \pause
   \begin{itemize}
-  \item We want to calculate the steady-state of the embedded \acs{DTMC} of the \acs{MRP} in
-    the regenerative states
+  \item We want to calculate the \alert{steady-state} of the embedded \acs{DTMC} of the \acs{MRP} in
+    the \alert{regenerative states}
     \pause
-  \item But we don't have $P$! \rotatebox[origin=c]{270}{:(}
+  \item But we don't have \alert{$P$}! \rotatebox[origin=c]{270}{:(}
   \end{itemize}
 \end{frame}
 
@@ -195,7 +196,7 @@
 \end{frame}
 
 \begin{frame}
-  Now we can solve the linear system:
+  Now we can \alert{solve} the linear system:
   \begin{equation*}
     \begin{cases}
       v=vP\\
@@ -209,22 +210,47 @@
   \end{equation*}
   \begin{itemize}
   \item \jj{RealMatrix} \& \jj{RealVector}
-  \item QR decomposition solver
+  \item \alert{QR decomposition} solver
     \begin{itemize}\tiny
     \item \jj{DecompositionSolver solver = new QRDecomposition(coefficients).getSolver();}
     \item \jj{RealVector steadyState = solver.solve(constants);}
     \end{itemize}
-  \item Convert \jj{steadyState} into a \jj{Map<DeterministicEnablingState,BigDecimal>}
+  \item \alert{Convert} \jj{steadyState} into a \jj{Map<DeterministicEnablingState,BigDecimal>}
   \end{itemize}
 \end{frame}
 
 \subsection{Sojourn time $a_{ij}$}
 \begin{frame}
   \frametitle{\insertsubsection}
-  \begin{block}{Definition}
-    The sojourn time \alert{$a_{ij}$} represents the average time spent in the
-    \alert{$j$-th marking} after the (last) \alert{$i$-th regeneration}.
-  \end{block}
+  \begin{center}
+    \begin{minipage}{0.6\linewidth}
+      \begin{block}{Definition}
+        The sojourn time \alert{$a_{ij}$} represents the
+        \begin{itemize}
+        \item<2-> average time spent in the \alert{$j$-th marking}
+        \item<3-> after the (last) \alert{$i$-th regeneration}.
+        \end{itemize}
+      \end{block}
+    \end{minipage}
+  \end{center}
+  \begin{center}
+    \begin{tikzpicture}[myMindmap,onslide=<-2>{concept color=mmcb},onslide=<3->{concept color=mmc2}]
+        \node(l) {i}
+        child[concept color=mmcb] { node {}
+          child { node{} }
+          child[onslide=<2->{concept color=mmc1}] { node{j}
+            child[concept color=mmcb] { node{} }
+            child[concept color=mmcb] { node{} }
+          }
+        }
+        child[concept color=mmcb] { node{} }
+        child[concept color=mmcb] { node{} 
+          child[onslide=<2->{concept color=mmc1}] { node{j}
+            child[concept color=mmcb] { node {} }
+          }
+        };        
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -233,8 +259,8 @@
   \begin{itemize}
   \item<1-> sum of avg \alert{time spent} in marking $j$ occurrences
     \begin{itemize}
-    \item<2-> \alert{sum} of avg times before each variable fires \alert{weighted} by the
-      probability of chosing that variable
+    \uncover<2->{\item \alert{sum} of avg times before each variable fires \alert{weighted} by the
+      probability of chosing that variable}
       \begin{itemize}
       \item<3-> \alert{condition} each variable to be the minimum (i.e. the one
         that fires)
@@ -291,21 +317,27 @@
 \subsection{\acf{MRP} steady-state}
 \begin{frame}
   \frametitle{\insertsubsection}
-  Let's combine the embedded \acs{DTMC} steady-state and the sojourn
+  Let's \alert{combine} the embedded \acs{DTMC} steady-state and the sojourn
   times!
   \pause
-  \begin{equation*}
-    \pi_j = \frac{\sum_i v_i a_{ij}}{K}
-  \end{equation*}
+  \begin{center}
+    \begin{minipage}{4cm}
+      \begin{block}{Formula:}
+        \begin{equation*}
+          \pi_j = \frac{\sum_i v_i a_{ij}}{K}
+        \end{equation*}
+      \end{block}
+    \end{minipage}
+  \end{center}
   \pause
   \begin{itemize}
-  \item We multiply the sojourn time in the marking $j$ after the
-    regeneration $i$ by the probability of reaching the $i$-th regeneration
+  \item We \alert{multiply} the \alert{sojourn} time in the marking \alert{$j$} after the
+    regeneration \alert{$i$} by the \alert{probability} of reaching the \alert{$i$}-th regeneration
     \pause
-  \item We do this for each regeneration that leads to the marking $j$
+  \item We do this for \alert{each} regeneration that \alert{leads} to the marking \alert{$j$}
     before another regeneration
     \pause
-  \item $K$ is a normalization factor calculated as the sum of $\pi_j$
+  \item \alert{$K$} is a \alert{normalization} factor calculated as the sum of \alert{$\pi_j$}
   \end{itemize}
 \end{frame}
 \section{Test}
@@ -425,11 +457,8 @@ getTestPlacesMarkings().put(tmpPlacesMarking, new BigDecimal("0.40"));
 
 \begin{frame}
   \begin{center}
-	\textbf{\calligra\Huge The End.}
-  \begin{center}
-    \includegraphics[width=5cm]{img/ornament.eps}    
-  \end{center}
-  \\[1cm]
+	\textbf{\calligra\Huge The End.}\\
+  \includegraphics[width=5cm]{img/ornament.eps}\\[1cm]
 	\pause
 	{\huge\calligra Questions?\pause{} Thank you!}
   \end{center}
