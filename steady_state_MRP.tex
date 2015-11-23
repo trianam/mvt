@@ -131,14 +131,14 @@
   \frametitle{\insertsubsection}
   \begin{itemize}
 	  \item \jj{class EmbeddedDTMC}
-	  %\pause
+	  \pause
 	  \begin{itemize}
 	  	\item written from scratch
 	  	\item calculate \alert{embedded \acs{DTMC}} steady-state
 	  \end{itemize}
-	  %\pause
+	  \pause
 	  \item \jj{class RegenerativeSteadyStateAnalysis}
-	  %\pause
+	  \pause
 	  \begin{itemize}
 	  	\item based on \jj{class RegenerativeTransientAnalysis}
 	  	\item calculate \alert{\acs{MRP}} steady-state
@@ -176,20 +176,23 @@
     \begin{itemize}
     \item We add a new \alert{reaching probability feature} to each
       state: \jj{class ReachingProbabilityFeature}
-      % \pause
+      \pause
     \item Inside \jj{SteadyStateInitialStateBuilder}: set it to
       1
-      %\pause
+      \pause
     \item Inside \jj{SteadyStatePostProcessor}: multiply the
       parent's reaching probability by the probability to chose a
       certain child
     \end{itemize}
   \end{block}
-  %\pause
+  \pause
   If we run a transient analysis on the \acf{PN} we get:
+  \pause
   \begin{itemize}
   \item \jj{regenerationClasses}
+    \pause
   \item {\scriptsize\jj{Map<DeterministicEnablingState,Map<DeterministicEnablingState,Set<State>>>}}
+    \pause
   \item sum reaching probability feature of each \jj{State} to compute
     elements of \alert{$P$}
   \end{itemize}
@@ -208,12 +211,15 @@
       \sum_i v_i = 1
     \end{cases}
   \end{equation*}
+  \pause
   \begin{itemize}
   \item \jj{RealMatrix} \& \jj{RealVector}
+    \pause
   \item \alert{QR decomposition} solver
     \begin{itemize}\tiny
     \item \jj{DecompositionSolver solver = new QRDecomposition(coefficients).getSolver();}
     \item \jj{RealVector steadyState = solver.solve(constants);}
+      \pause
     \end{itemize}
   \item \alert{Convert} \jj{steadyState} into a \jj{Map<DeterministicEnablingState,BigDecimal>}
   \end{itemize}
@@ -324,7 +330,7 @@
     \begin{minipage}{4cm}
       \begin{block}{Formula:}
         \begin{equation*}
-          \pi_j = \frac{\sum_i v_i a_{ij}}{K}
+          \pi_j = \frac{\sum_i v_i a_{ij}}{Z}
         \end{equation*}
       \end{block}
     \end{minipage}
@@ -337,7 +343,7 @@
   \item We do this for \alert{each} regeneration that \alert{leads} to the marking \alert{$j$}
     before another regeneration
     \pause
-  \item \alert{$K$} is a \alert{normalization} factor calculated as the sum of \alert{$\pi_j$}
+  \item \alert{$Z$} is a \alert{normalization} factor calculated as the sum of \alert{$\pi_j$}
   \end{itemize}
 \end{frame}
 \section{Test}
